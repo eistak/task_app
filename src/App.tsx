@@ -6,6 +6,11 @@ import axios from 'axios';
 //const taskUrl = 'http://localhost/api/v1/tasks';
 const taskUrl = 'https://jsonplaceholder.typicode.com/todos';
 
+interface Todo {
+  id: number
+  title: string
+  completed: boolean
+}
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -22,10 +27,10 @@ function App() {
     console.log('レンダリング!')
   },[]);
 
-  const inCompletedList = todoList.filter((todo: any) =>{
+  const inCompletedList = todoList.filter((todo: Todo) =>{
     return !todo.completed;
   });
-  const completedList = todoList.filter((todo: any) => {
+  const completedList = todoList.filter((todo: Todo) => {
     return todo.completed;
   });
 
@@ -36,7 +41,7 @@ function App() {
       <button>Todoを追加する</button>
       <h2>未完了TODOリスト</h2>
       <ul>
-        {inCompletedList.map((todo: any)=>(
+        {inCompletedList.map((todo: Todo)=>(
           <li key={todo.id}>
             {todo.title}
             <button>{todo.completed ? "未完了リストへ": "完了リストへ"}</button>
@@ -47,7 +52,7 @@ function App() {
 
       <h2>完了TODOリスト</h2>
       <ul>
-        {completedList.map((todo: any)=>(
+        {completedList.map((todo: Todo)=>(
           <li key={todo.id}>
             {todo.title}
           </li>
